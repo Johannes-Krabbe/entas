@@ -1,11 +1,11 @@
 {
   "name": "entas",
-  "module": "index.ts",
-  "type": "module",
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "api": "workspace:*",
+    "web": "workspace:*"
   }
 }
