@@ -1,38 +1,29 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 model User {
-  id                  Int      @id @default(autoincrement())
-  createdAt           DateTime @default(now())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
 
-  email               String   @unique
-  username            String   @unique
-  password            String
-  phoneNumber         String?  @unique
-  name                String?
+  email       String  @unique
+  username    String  @unique
+  password    String
+  phoneNumber String? @unique
+  name        String?
 
-  onboardingCompleted Boolean?  @default(false)
-  role                UserRole     @default(USER)
+  onboardingCompleted Boolean  @default(false)
+  role                UserRole @default(USER)
 
-  posts               Post[]
+  posts Post[]
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   published Boolean  @default(false)
-  title     String   @db.VarChar(255)
+  title     String
   content   String?
 
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  author   User?   @relation(fields: [authorId], references: [id])
+  authorId String?
 }
 
 enum UserRole {
