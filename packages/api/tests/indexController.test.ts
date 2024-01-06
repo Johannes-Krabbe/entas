@@ -7,6 +7,6 @@ test("GET / => healthcheck", async () => {
 });
 
 test("GET /test => create User", async () => {
-  const res = await app.request("/user");
+  const res = await app.request("/user", { method: "POST" });
   expect(res.status).toBe(200);
 });

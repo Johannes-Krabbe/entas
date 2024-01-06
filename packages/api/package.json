@@ -1,21 +1,18 @@
 {
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "generate": "prisma format && bun prismaSchema:create && prisma generate --schema ./prisma/tmp.prisma && bun prismaSchema:delete",
-    "migrate": "prisma format && bun prismaSchema:create && prisma migrate dev --schema ./prisma/tmp.prisma --name init && bun prismaSchema:delete",
-    "db:reset": "bun prismaSchema:create && bun db:baseReset",
-    "db:resetTesting": "bun prismaSchema:createTesting && bun db:baseReset",
-    "db:baseReset": "prisma format && prisma migrate reset --force --schema ./prisma/tmp.prisma && prisma migrate dev --schema ./prisma/tmp.prisma --name init && bun prismaSchema:delete",
-    "prismaSchema:create": "cd prisma && cat 'datasource/datasource.prisma' 'schema.prisma' > tmp.prisma",
-    "prismaSchema:createTesting": "cd prisma && cat 'datasource/testDatasource.prisma' 'schema.prisma' > tmp.prisma",
-    "prismaSchema:delete": "rm ./prisma/tmp.prisma"
+    "generate": "prisma format && prisma generate",
+    "migrate": "bun generate && prisma migrate dev --name migration",
+    "dbreset": "bun migrate && prisma migrate reset --force"
   },
   "dependencies": {
     "@prisma/client": "5.7.1",
+    "dotenv": "^16.3.1",
     "hono": "^3.11.11"
   },
   "devDependencies": {
     "bun-types": "^1.0.7",
-    "prisma": "^5.7.1"
+    "prisma": "^5.7.1",
+    "prismock": "^1.24.0"
   }
 }

@@ -1,11 +1,8 @@
 import { beforeAll } from "bun:test";
-import { resetDatabase } from "../prisma/database";
+import { ENV } from "../src/env";
 
 beforeAll(async () => {
-  if (!process.env.DATABASE_URL_TESTING) {
-    console.log;
-    throw new Error("DATABASE_URL_TESTING is not set.");
-  }
-  await resetDatabase();
-  console.log("running test.");
+  console.log(ENV.DATABASE_URL);
+
+  console.log("beforeAll done");
 });
