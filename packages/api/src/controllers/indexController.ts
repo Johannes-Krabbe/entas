@@ -8,7 +8,7 @@ indexController.get("/", (c) => c.text("This is the Entas API", 200));
 indexController.post("/user", async (c) => {
   const user = await prisma.user.create({
     data: {
-      email: "Johannes",
+      email: "Johannes@dings.dings",
       username: "johannes",
       password: "1234",
     },
