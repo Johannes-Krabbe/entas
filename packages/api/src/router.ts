@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { indexController } from "./controllers/indexController";
+import { indexController } from "./controllers/index.controller";
 
 const router = new Hono();
 
