@@ -5,7 +5,6 @@
     "packages/*"
   ],
   "devDependencies": {
-    "api": "workspace:*",
-    "web": "workspace:*"
+    "api": "workspace:*"
   }
 }
