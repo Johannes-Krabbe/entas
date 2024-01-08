@@ -1,5 +1,5 @@
-import { prisma } from "../prisma/client";
-import app from "../src/app";
+import { prisma } from "../../prisma/client";
+import app from "../../src/app";
 import { test, expect } from "bun:test";
 
 test("GET / => healthcheck", async () => {
