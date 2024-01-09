@@ -1,13 +1,15 @@
 {
-    "name": "entas",
-    "version": "1.0.0",
-    "scripts": {
-        "format": "prettier --write \"**/*.ts\""
-    },
-    "workspaces": [
-        "packages/*"
-    ],
-    "devDependencies": {
-        "api": "workspace:*"
-    }
+  "name": "entas",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "prettier --write \"**/*.ts\""
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
+    "@types/sendmail": "^1.4.7",
+    "api": "workspace:*"
+  }
 }

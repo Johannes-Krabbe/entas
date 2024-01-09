@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { prisma } from '../../prisma/client'
+import { sendEmail } from '../helpers/email.helper'
 
 export const indexController = new Hono()
 
@@ -14,4 +15,10 @@ indexController.post('/user', async (c) => {
         },
     })
     return c.json(user, 200)
+})
+
+indexController.post('/email', async (c) => {
+    const message = await sendEmail('johannes@krabbe.dev', 'Test', 'test')
+
+    return c.json({ success: true, message }, 200)
 })

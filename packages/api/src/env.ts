@@ -1,11 +1,17 @@
 import dotenv from 'dotenv'
 
-const keys = ['DATABASE_URL', 'NODE_ENV', 'JWT_SECRET'] as const
+const keys = [
+    'DATABASE_URL',
+    'NODE_ENV',
+    'JWT_SECRET',
+    'SMTP_PASSWORD',
+] as const
 
 interface env {
     DATABASE_URL: string
     NODE_ENV: string
     JWT_SECRET: string
+    SMTP_PASSWORD: string
 }
 
 function env(): env {
@@ -24,6 +30,7 @@ function env(): env {
         DATABASE_URL: process.env.DATABASE_URL!,
         NODE_ENV: process.env.NODE_ENV ?? 'development',
         JWT_SECRET: process.env.JWT_SECRET!,
+        SMTP_PASSWORD: process.env.SMTP_PASSWORD!,
     }
 }
 
