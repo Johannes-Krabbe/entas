@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { prisma } from '../../prisma/client'
-import { sendEmail } from '../helpers/email.helper'
+import { sendVerificationEmail, signup } from '../services/auth.service'
 
 export const indexController = new Hono()
 
@@ -18,7 +18,21 @@ indexController.post('/user', async (c) => {
 })
 
 indexController.post('/email', async (c) => {
-    const message = await sendEmail('johannes@krabbe.dev', 'Test', 'test')
+    let user = await prisma.user.findUnique({
+        where: {
+            email: 'johannes@krabbe.dev',
+        },
+    })
 
-    return c.json({ success: true, message }, 200)
+    if (!user) {
+        user = (
+            await signup({
+                username: 'johannes',
+                email: 'johannes@krabbe.dev',
+                password: '1234',
+            })
+        ).user
+    }
+    sendVerificationEmail(user)
+    return c.json({ success: true }, 200)
 })

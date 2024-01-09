@@ -11,11 +11,12 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
 
-  email       String  @unique
-  username    String  @unique
-  password    String
-  phoneNumber String? @unique
-  name        String?
+  email           String    @unique
+  username        String    @unique
+  password        String
+  phoneNumber     String?   @unique
+  name            String?
+  emailVerifiedAt DateTime?
 
   onboardingCompleted Boolean  @default(false)
   role                UserRole @default(USER)

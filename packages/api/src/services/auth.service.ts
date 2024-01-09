@@ -5,6 +5,8 @@ import { ENV } from '../env'
 import { prisma } from '../../prisma/client'
 import { ERRORS, ServiceError } from '../../types/error.types'
 import { verifyPassword } from '../helpers/password.helper'
+import { sendEmail } from '../helpers/email.helper'
+import ejs from 'ejs'
 
 export async function signup({
     username,
@@ -77,6 +79,24 @@ export async function login({
     const token = await createTokenForUser(user)
 
     return { user, token }
+}
+
+export async function sendVerificationEmail(user: User): Promise<void> {
+    const payload = {
+        userId: user.id,
+        verifyEmail: true,
+    }
+
+    const token = await sign(payload, ENV.JWT_SECRET)
+
+    const file = await Bun.file('src/templates/verifyEmail.ejs').text()
+
+    const html = ejs.render(file, {
+        user: { username: 'Johannes' },
+        link: `${ENV.WEB_URL}/verify-email?token=${token}`,
+    })
+
+    await sendEmail('johannes@krabbe.dev', 'Test', html)
 }
 
 /*

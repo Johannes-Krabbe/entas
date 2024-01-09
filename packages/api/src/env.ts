@@ -5,6 +5,7 @@ const keys = [
     'NODE_ENV',
     'JWT_SECRET',
     'SMTP_PASSWORD',
+    'WEB_URL',
 ] as const
 
 interface env {
@@ -12,6 +13,7 @@ interface env {
     NODE_ENV: string
     JWT_SECRET: string
     SMTP_PASSWORD: string
+    WEB_URL: string
 }
 
 function env(): env {
@@ -31,6 +33,7 @@ function env(): env {
         NODE_ENV: process.env.NODE_ENV ?? 'development',
         JWT_SECRET: process.env.JWT_SECRET!,
         SMTP_PASSWORD: process.env.SMTP_PASSWORD!,
+        WEB_URL: process.env.WEB_URL!,
     }
 }
 

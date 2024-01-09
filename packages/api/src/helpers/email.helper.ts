@@ -12,14 +12,12 @@ export async function sendEmail(email: string, subject: string, html: string) {
         },
     })
 
-    // async..await is not allowed in global scope, must use a wrapper
-    // send mail with defined transport object
     const info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <noreply@entas.cc>', // sender address
-        to: 'johannes@krabbe.dev', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>', // html body
+        from: 'Entas 👾" <noreply@entas.cc>',
+        to: email,
+        subject: subject,
+        text: 'Could not render HTML',
+        html,
     })
 
     return info
