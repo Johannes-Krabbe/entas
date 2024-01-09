@@ -1,10 +1,13 @@
 {
-  "name": "entas",
-  "version": "1.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "api": "workspace:*"
-  }
+    "name": "entas",
+    "version": "1.0.0",
+    "scripts": {
+        "format": "prettier --write \"**/*.ts\""
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "api": "workspace:*"
+    }
 }
