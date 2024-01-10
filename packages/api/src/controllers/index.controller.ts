@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { prisma } from '../../prisma/client'
 import { sendVerificationEmail, signup } from '../services/auth.service'
+import { sendWithDiscord } from '../helpers/discord.helper'
 
 export const indexController = new Hono()
 
@@ -34,5 +35,11 @@ indexController.post('/email', async (c) => {
         ).user
     }
     sendVerificationEmail(user)
+    return c.json({ success: true }, 200)
+})
+
+indexController.post('/discord', async (c) => {
+    await sendWithDiscord('Test message from the Entas API')
+
     return c.json({ success: true }, 200)
 })
