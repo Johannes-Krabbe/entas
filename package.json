@@ -11,6 +11,7 @@
     "@types/ejs": "^3.1.5",
     "@types/nodemailer": "^6.4.14",
     "@types/sendmail": "^1.4.7",
-    "api": "workspace:*"
+    "api": "workspace:*",
+    "web": "workspace:*"
   }
 }
