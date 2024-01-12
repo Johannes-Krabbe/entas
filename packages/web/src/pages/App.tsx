@@ -1,9 +1,7 @@
-import Signin from '../components/auth/Signin'
-
 function App() {
     return (
         <>
-            <Signin />
+            <p>Hello, World!</p>
         </>
     )
 }
