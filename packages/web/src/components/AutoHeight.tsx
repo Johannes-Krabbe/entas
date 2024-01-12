@@ -26,6 +26,7 @@ const AutoHeight = ({ children, ...props }: AutoHeightProps) => {
         <div>
             <AnimateHeight
                 {...props}
+                duration={200}
                 height={height}
                 contentClassName="auto-content"
                 contentRef={contentDiv}

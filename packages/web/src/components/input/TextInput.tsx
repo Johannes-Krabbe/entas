@@ -39,9 +39,9 @@ export default function TextInput({
             />
             <AutoHeight>
                 {bottomLabel && (
-                    <label className={styles.bottomLabel} htmlFor="username">
-                        {bottomLabel}
-                    </label>
+                    <div className={styles.bottomLabel}>
+                        <label htmlFor="username">{bottomLabel}</label>
+                    </div>
                 )}
             </AutoHeight>
         </div>

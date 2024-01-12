@@ -23,12 +23,12 @@ export default function Signin() {
                         type="text"
                         topLabel="Username"
                         bottomLabel={
-                            username.length < 3 && username.length > 0
+                            username.length < 3 && username.length !== 0
                                 ? 'Username must be at least 3 characters long'
                                 : null
                         }
                         state={
-                            username.length < 3 && username.length > 0
+                            username.length < 3 && username.length !== 0
                                 ? 'error'
                                 : 'default'
                         }
@@ -40,12 +40,12 @@ export default function Signin() {
                         type="text"
                         topLabel="Email"
                         bottomLabel={
-                            email.length < 3 && email.length > 0
+                            email.length < 3 && email.length !== 0
                                 ? 'Email must be at least 3 characters long'
                                 : null
                         }
                         state={
-                            email.length < 3 && email.length > 0
+                            email.length < 3 && email.length !== 0
                                 ? 'error'
                                 : 'default'
                         }

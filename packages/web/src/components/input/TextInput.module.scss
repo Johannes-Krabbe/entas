@@ -10,10 +10,7 @@
         font-size: 1rem;
         margin-bottom: 0.5rem;
     }
-    .bottomLabel {
-        margin-top: 0.5rem;
-        text-align: center;
-    }
+
     input {
         width: 18rem;
         padding: 1rem;
@@ -21,9 +18,13 @@
         background-color: #f5f5f5;
         color: #0f1035;
         font-size: 1rem;
+        margin-bottom: 0.5rem;
         &:focus {
             outline: none;
         }
+    }
+    .bottomLabel {
+        text-align: center;
     }
 }
 .error {
