@@ -1,3 +1,4 @@
+import AutoHeight from '../AutoHeight'
 import styles from './TextInput.module.scss'
 
 interface TextInputProps {
@@ -36,11 +37,13 @@ export default function TextInput({
                 placeholder={placeholder}
                 value={value}
             />
-            {bottomLabel && (
-                <label className={styles.bottomLabel} htmlFor="username">
-                    {bottomLabel}
-                </label>
-            )}
+            <AutoHeight>
+                {bottomLabel && (
+                    <label className={styles.bottomLabel} htmlFor="username">
+                        {bottomLabel}
+                    </label>
+                )}
+            </AutoHeight>
         </div>
     )
 }
