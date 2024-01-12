@@ -1,0 +1,36 @@
+.input {
+    width: 18rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    label {
+        color: #0f1035;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .bottomLabel {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+    input {
+        width: 18rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #f5f5f5;
+        color: #0f1035;
+        font-size: 1rem;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.error {
+    input {
+        border: 2px solid red;
+    }
+    label {
+        color: red;
+    }
+}
