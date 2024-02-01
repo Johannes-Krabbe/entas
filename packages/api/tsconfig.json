@@ -1,10 +1,9 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "strict": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "types": ["bun-types"],
-    "strictNullChecks": true
-  }
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "strict": true,
+        "jsx": "react-jsx",
+        "types": ["bun-types"],
+        "strictNullChecks": true
+    }
 }

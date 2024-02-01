@@ -19,6 +19,7 @@ export async function sendEmail(email: string, subject: string, html: string) {
         text: 'Could not render HTML',
         html,
     })
+    console.log(info)
 
     return info
 }

@@ -1,26 +1,19 @@
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
-import { z } from 'zod'
+import z from 'zod'
+import { signup } from '../../services/auth.service'
+import { parseMeUser } from '../../schemas/user.schema'
 
 export const authController = new Hono()
 
-authController.get('/verify-email', (c) => {
-    return c.text('This is the Entas API', 200)
+const zSignupSchema = z.object({
+    username: z.string(),
+    email: z.string(),
+    password: z.string(),
 })
 
-const schema = z.object({
-    name: z.string(),
-    age: z.string(),
+authController.post('/signup', zValidator('json', zSignupSchema), async (c) => {
+    const data = c.req.valid('json')
+    const { user, token } = await signup(data)
+    return c.json({ success: true, token, user: parseMeUser(user) }, 201)
 })
-
-authController.post(
-    '/post',
-    zValidator('json', schema, (result, c) => {
-        if (!result.success) {
-            return c.text('Invalid!', 400)
-        }
-    }),
-    (c) => {
-        return c.json({ success: true }, 200)
-    }
-)
