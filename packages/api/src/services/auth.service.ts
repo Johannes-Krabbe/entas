@@ -6,7 +6,7 @@ import { prisma } from '../../prisma/client'
 import { ERRORS, ServiceError } from '../../types/error.types'
 import { verifyPassword } from '../helpers/password.helper'
 import { sendEmail } from '../helpers/email.helper'
-import ejs from 'ejs'
+import { getVerifyEmailHtml } from '../emails/VerifyEmail'
 
 export async function signup({
     username,
@@ -89,14 +89,47 @@ export async function sendVerificationEmail(user: User): Promise<void> {
 
     const token = await sign(payload, ENV.JWT_SECRET)
 
-    const file = await Bun.file('src/templates/verifyEmail.ejs').text()
+    const verificationUrl = `${ENV.WEB_URL}/verify-email?token=${token}`
 
-    const html = ejs.render(file, {
-        user: { username: 'Johannes' },
-        link: `${ENV.WEB_URL}/verify-email?token=${token}`,
+    const html = getVerifyEmailHtml({
+        name: 'Johannes',
+        verificationUrl,
     })
 
-    await sendEmail('johannes@krabbe.dev', 'Test', html)
+    await sendEmail({
+        to: user.email,
+        subject: 'Verify your email',
+        html,
+        text: `Click this link to verify your email ${verificationUrl}`,
+    })
+}
+
+export async function verifyEmail(token: string): Promise<User> {
+    const payload = await verify(token, ENV.JWT_SECRET)
+    if (!payload.verifyEmail) {
+        throw new ServiceError(ERRORS.AUTH.INVALID_VERIFY_EMAIL_TOKEN)
+    }
+
+    const user = await prisma.user.findUnique({
+        where: {
+            id: payload.userId,
+        },
+    })
+
+    if (!user) {
+        throw new ServiceError(ERRORS.AUTH.USER_NOT_FOUND_FROM_TOKEN_ID)
+    }
+
+    const updatedUser = await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            emailVerifiedAt: new Date(),
+        },
+    })
+
+    return updatedUser
 }
 
 /*

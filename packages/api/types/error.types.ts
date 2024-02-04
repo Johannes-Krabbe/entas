@@ -60,5 +60,10 @@ export const ERRORS = {
             message: `Please provide either email or username`,
             code: 'entas_auth_0007',
         },
+        INVALID_VERIFY_EMAIL_TOKEN: {
+            error: true,
+            message: `Invalid verify email token`,
+            code: 'entas_auth_0008',
+        },
     },
 }

@@ -4,6 +4,7 @@ import { sendVerificationEmail, signup } from '../services/auth.service'
 import { sendWithDiscord } from '../helpers/discord.helper'
 import { getVerifyEmailHtml } from '../emails/VerifyEmail'
 import { sendEmail } from '../helpers/email.helper'
+import { ERRORS, ServiceError } from '../../types/error.types'
 
 export const indexController = new Hono()
 
@@ -41,17 +42,7 @@ indexController.post('/email', async (c) => {
 })
 
 indexController.post('/discord', async (c) => {
-    await sendWithDiscord('Test message from the Entas API')
-
-    return c.json({ success: true }, 200)
-})
-
-indexController.get('/test', async (c) => {
-    const html = getVerifyEmailHtml({
-        name: 'Johannes',
-        verificationUrl: 'https://entas.dev',
-    })
-    sendEmail('Johannes@Krabbe.dev', 'Test', html)
+    throw new ServiceError(ERRORS.AUTH.PROVIDE_EMAIL_OR_USERNAME)
 
     return c.json({ success: true }, 200)
 })
